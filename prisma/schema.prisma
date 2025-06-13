@@ -1,0 +1,28 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  username  String   @unique
+  password  String
+  email     String   @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 👇 Relation field: One user has many images
+  images    Image[]
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  imageId   String
+  createdAt DateTime @default(now())
+
+  // 👇 Foreign key to connect to User
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
