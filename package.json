@@ -6,11 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "email": "email dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.11",
-    "@prisma/client": "^6.9.0",
+    "@premieroctet/next-crud": "^4.0.1",
+    "@prisma/client": "^5.22.0",
+    "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-navigation-menu": "^1.2.13",
@@ -45,7 +48,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "prisma": "^6.9.0",
+    "prisma": "^5.22.0",
     "react-email": "4.0.16",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",

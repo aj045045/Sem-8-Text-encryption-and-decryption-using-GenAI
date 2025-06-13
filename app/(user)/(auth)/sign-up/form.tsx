@@ -26,7 +26,6 @@ export function SignUpForm() {
 
     // NOTE hashing password
 
-
     const sendOTPButton = async () => {
         const username = form.watch("username").trim();
 
@@ -82,7 +81,6 @@ export function SignUpForm() {
         );
     };
 
-
     // NOTE Signup submission button
     const handleSignUpSubmit = async (payload: z.infer<typeof signUpFormSchema>) => {
         const { email, name, password, username, pin, sendPin } = payload;
@@ -100,14 +98,13 @@ export function SignUpForm() {
         redirect(pageLinks.login);
     };
 
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSignUpSubmit)}
-                className="row-span-2 py-10 mx-auto space-y-8 text-green-950">
+                className="row-span-2 py-10 mx-auto space-y-8">
                 <div>
                     <div className="font-sans text-3xl">Sign Up</div>
-                    <div className="flex items-center text-sm text-neutral-600">
+                    <div className="flex items-center text-sm">
                         <span>Already have an account? </span>
                         <Link href={pageLinks.login}>
                             <Button variant={"link"}>Login</Button>

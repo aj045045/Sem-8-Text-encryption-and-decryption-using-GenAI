@@ -1,5 +1,5 @@
 "use client"
-import { Bookmark, BookOpen, Home, Image, Info, LayoutDashboardIcon, LucideSearch, Mail, Search, Tag, User } from "lucide-react"
+import { Home, LucideSearch, MessageCircle, User } from "lucide-react"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react";
@@ -26,26 +26,18 @@ export function SearchBarComp() {
 
     const publicLinks = [
         { href: pageLinks.home, label: "Home", icon: <Home size={18} /> },
-        { href: pageLinks.search, label: "Search", icon: <Search size={18} /> },
-        { href: pageLinks.blog, label: "Blog", icon: <BookOpen size={18} /> },
-        { href: pageLinks.author, label: "Author", icon: <User size={18} /> },
-        { href: pageLinks.tag, label: "Tag", icon: <Tag size={18} /> },
-        { href: pageLinks.contact, label: "Contact", icon: <Mail size={18} /> },
-        { href: pageLinks.about, label: "About", icon: <Info size={18} /> },
     ];
 
     const userLinks = [
         { href: pageLinks.user.profile, label: "Profile", icon: <User size={18} /> },
-        { href: pageLinks.user.dashboard, label: "Dashboard", icon: <LayoutDashboardIcon size={18} /> },
-        { href: pageLinks.user.bookmarks, label: "Bookmarks", icon: <Bookmark size={18} /> },
-        { href: pageLinks.user.blogs, label: "Blogs", icon: <BookOpen size={18} /> },
-        { href: pageLinks.user.image, label: "Images", icon: <Image size={18} /> }
+        { href: pageLinks.user.encrypt_message, label: "Encrypt message", icon: <MessageCircle size={18} /> },
+
     ];
 
     return (
         <>
             <div className="flex items-center justify-between w-20 px-2 py-1 space-x-2 text-sm border rounded-full bg-muted-foreground/5 border-border/50 md:px-4 md:py-1.5 md:rounded-sm md:w-52" onClick={() => setOpen((open) => !open)}>
-                <div className="flex items-center text-green-950 space-x-2">
+                <div className="flex items-center  space-x-2">
                     <LucideSearch size={15} />
                     <div className="md:hidden">Ctrl&nbsp;K</div>
                     <div className="hidden md:block">Quick Search...</div>
@@ -61,14 +53,14 @@ export function SearchBarComp() {
                     <CommandEmpty>No results found.</CommandEmpty>
 
                     {/* User Info Display */}
-                    {session && !session.user && (
+                    {session && (
                         <>
                             <CommandGroup heading="User Info">
                                 <div className="flex items-center ml-2">
-                                    {/* <div className="bg-green-200 border border-green-600 rounded-full py-0.5 px-2.5 text-green-950">{session.user.name.charAt(0)}</div> */}
+                                    <div className="bg-green-200 border border-green-600 rounded-full uppercase py-0.5 px-2.5 text-green-950">{session.user?.name?.charAt(0)}</div>
                                     <div className="px-4 py-2 text-sm text-muted-foreground">
-                                        {/* <div className="font-medium text-foreground">{session.user?.name.slice(0, -1)}</div> */}
-                                        {/* <div className="text-xs">{session.user?.email}</div> */}
+                                        <div className="font-medium text-foreground capitalize">{session.user?.name}</div>
+                                        <div className="text-xs">{session.user?.email}</div>
                                     </div>
                                 </div>
                             </CommandGroup>

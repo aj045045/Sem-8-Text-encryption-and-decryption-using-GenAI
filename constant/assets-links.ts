@@ -3,7 +3,7 @@ various properties such as `logo`, `sign_up`, `login`, `forget_password`, and `s
 their own nested properties like `src` (source URL) and `alt` (alternative text) for images. */
 export const assetsLinks = {
     logo: {
-        src: '/logo.svg',
+        src: '/logo.png',
         alt: 'Logo Image'
     },
     sign_up: {
@@ -14,30 +14,12 @@ export const assetsLinks = {
         src: '/login.svg',
         alt: 'Login Image',
     },
-    forget_password: {
-        src: '/forget-password.svg',
+    forgot_password: {
+        src: '/forgot-password.svg',
         alt: 'Forget Password Image',
     },
-    social: {
-        github: {
-            src: '/social-logo/github.svg',
-            alt: 'Github Icon Image'
-        },
-        instagram: {
-            src: '/social-logo/instagram.svg',
-            alt: 'Instagram Icon Image'
-        },
-        linkedIn: {
-            src: '/social-logo/linkedin.svg',
-            alt: 'LinkedIn Icon Image'
-        },
-        twitter: {
-            src: '/social-logo/twitter.svg',
-            alt: 'Twitter Icon Image'
-        },
-        youtube: {
-            src: '/social-logo/youtube.svg',
-            alt: 'Twitter Icon Image'
-        }
+    home_image_creation: {
+        src: '/image-creation.png',
+        alt: 'Image creation home icon'
     }
 }

@@ -1,6 +1,6 @@
 import { useForm, UseFormProps, UseFormReturn } from "react-hook-form";
 import { ZodType, ZodTypeDef, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod/src/index.js";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 /**
  * The function `useZodForm` creates a form hook using a Zod schema for validation in TypeScript.

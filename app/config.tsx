@@ -22,11 +22,9 @@ export function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const isAdminRoute = pathname.startsWith('/admin');
   return (
-    <html lang="en" className={isAdminRoute ? "dark" : "light"} style={{ colorScheme: isAdminRoute ? "dark" : "light" }}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased ${!isAdminRoute ? "bg-green-50" : ""}`}>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
           <SWRConfig
             value={{

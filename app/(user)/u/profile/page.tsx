@@ -1,147 +1,105 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, } from '@/components/ui/card';
-import { useZodForm } from '@/lib/use-zod-form';
-import { UserZodSchema } from '@/interface/form';
-import useSWR from 'swr';
-import { UserInterface } from '@/interface/user';
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { UtilityHandler } from '@/lib/form-handler';
-import { useSession } from 'next-auth/react';
-const ProfilePage = () => {
-        const { data: sessionData } = useSession();
-        // const url = `/api/crud/users?where=${encodeURIComponent(JSON.stringify({ email: { $eq: sessionData?.user.email } }))}`;
-        // const { data, isLoading } = useSWR<UserInterface[]>(url);
-        const form = useZodForm(UserZodSchema, {
-                defaultValues: {
-                        bio: "",
-                        bookmarks: undefined,
-                        comments: undefined,
-                        email: "",
-                        id: -1,
-                        
-                }
-        });
-        // useEffect(() => {
-        //         if (data && data[0]) {
-        //                 form.reset(data[0]);
-        //         }
-        // }, [data, form]);
+"use client";
 
-        // if (isLoading) {
-        //         return <div>Loading...</div>;
-        // }
-        // if (!data || data.length === 0) {
-        //         return <div>No data found</div>;
-        // }
-        return (
-                <div className="flex justify-center items-center min-h-[80vh] bg-gradient-to-br from-green-50 to-blue-50 py-8">
-                        <Card className="w-full max-w-2xl shadow-xl border-2 border-blue-100">
-                                <CardHeader className="flex flex-col items-center gap-2">
-                                        <CardTitle className="text-3xl font-bold text-blue-900">Profile</CardTitle>
-                                        <CardDescription className="text-base text-blue-700">View and update your personal information</CardDescription>
-                                </CardHeader>
-                                {JSON.stringify(sessionData?.user)}
-                                {/* {JSON.stringify(data[0])} */}
-                                <CardContent>
-                                        <Form {...form}>
-                                                <form onSubmit={form.handleSubmit((data: UserInterface) => UtilityHandler.onSubmitPut("/api/crud/user", data))} className="space-y-8 max-w-3xl mx-auto py-10">
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import useSWR from "swr";
 
-                                                        <div className="grid grid-cols-12 gap-4">
-
-                                                                <div className="col-span-6">
-
-                                                                        <FormField
-                                                                                control={form.control}
-                                                                                name="name"
-                                                                                render={({ field }) => (
-                                                                                        <FormItem>
-                                                                                                <FormLabel>Full name</FormLabel>
-                                                                                                <FormControl>
-                                                                                                        <Input
-                                                                                                                placeholder="Full name"
-
-                                                                                                                type="text"
-                                                                                                                {...field} />
-                                                                                                </FormControl>
-                                                                                                <FormDescription>Enter your full name</FormDescription>
-                                                                                                <FormMessage />
-                                                                                        </FormItem>
-                                                                                )}
-                                                                        />
-                                                                </div>
-
-                                                                <div className="col-span-6">
-
-                                                                        <FormField
-                                                                                control={form.control}
-                                                                                name="username"
-                                                                                render={({ field }) => (
-                                                                                        <FormItem>
-                                                                                                <FormLabel>User name</FormLabel>
-                                                                                                <FormControl>
-                                                                                                        <Input
-                                                                                                                placeholder="user"
-
-                                                                                                                type="text"
-                                                                                                                {...field} />
-                                                                                                </FormControl>
-                                                                                                <FormDescription>This is your user name</FormDescription>
-                                                                                                <FormMessage />
-                                                                                        </FormItem>
-                                                                                )}
-                                                                        />
-                                                                </div>
-
-                                                        </div>
-
-                                                        <FormField
-                                                                control={form.control}
-                                                                name="email"
-                                                                render={({ field }) => (
-                                                                        <FormItem>
-                                                                                <FormLabel>Email Id</FormLabel>
-                                                                                <FormControl>
-                                                                                        <Input
-                                                                                                placeholder="email"
-
-                                                                                                type="email"
-                                                                                                {...field} />
-                                                                                </FormControl>
-                                                                                <FormDescription>Enter your email-id</FormDescription>
-                                                                                <FormMessage />
-                                                                        </FormItem>
-                                                                )}
-                                                        />
-
-                                                        <FormField
-                                                                control={form.control}
-                                                                name="bio"
-                                                                render={({ field }) => (
-                                                                        <FormItem>
-                                                                                <FormLabel>Bio</FormLabel>
-                                                                                <FormControl>
-                                                                                        <Textarea
-                                                                                                placeholder="Placeholder"
-                                                                                                className="resize-none"
-                                                                                                {...field}
-                                                                                        />
-                                                                                </FormControl>
-                                                                                <FormDescription>You can @mention other users and organizations.</FormDescription>
-                                                                                <FormMessage />
-                                                                        </FormItem>
-                                                                )}
-                                                        />
-                                                        <Button type="submit">Submit</Button>
-                                                </form>
-                                        </Form>
-                                </CardContent>
-                        </Card>
-                </div>
-        );
+interface User {
+        id: number;
+        name: string;
+        username: string;
+        email: string;
+        createdAt: string;
 };
 
-export default ProfilePage;
+interface Image {
+        id: number;
+        imageId: string;
+        createdAt: string;
+};
+
+export default function ProfilePage() {
+        const { data: session } = useSession();
+        const urlUser = `/api/crud/users?where=${encodeURIComponent(JSON.stringify({ email: { $eq: session?.user?.email } }))}`;
+        const { data: dataUser, isLoading: isUserLoading } = useSWR<User[]>(urlUser);
+        const urlImage =
+                dataUser && dataUser.length > 0
+                        ? `/api/crud/images?where=${encodeURIComponent(JSON.stringify({ userId: { $eq: dataUser[0].id } }))}`
+                        : null;
+        const { data: dataImage, isLoading: isImageLoading } = useSWR<Image[]>(urlImage);
+
+        if (isUserLoading || isImageLoading) {
+                return (
+                        <div className="flex items-center justify-center min-h-screen">
+                                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+                        </div>
+                );
+        }
+        if (!dataUser || !dataImage) {
+                return (
+                        <div className="flex items-center justify-center min-h-screen">
+                                <p className="text-xl text-gray-600">
+                                        Please sign in to view your profile
+                                </p>
+                        </div>
+                );
+        }
+        const user = dataUser[0];
+        const images = dataImage;
+        return (
+                <div className="container mx-auto px-4 py-8">
+                        <div className="max-w-4xl mx-auto">
+                                <Card className="mb-8">
+                                        <CardContent className="p-6">
+                                                <div className="flex items-center space-x-6">
+                                                        <Avatar className="h-24 w-24">
+                                                                <AvatarImage
+                                                                        src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name.charAt(0)}`}
+                                                                />
+                                                                <AvatarFallback>{user.username}</AvatarFallback>
+                                                        </Avatar>
+                                                        <div>
+                                                                <h1 className="text-3xl font-bold">{user.name}</h1>
+                                                                <p className="text-gray-600">@{user.username}</p>
+                                                                <p className="text-gray-600">{user.email}</p>
+                                                                <p className="text-sm text-gray-500">
+                                                                        Member since {new Date(user.createdAt).toLocaleDateString()}
+                                                                </p>
+                                                        </div>
+                                                </div>
+                                        </CardContent>
+                                </Card>
+
+                                <h2 className="text-2xl font-bold mb-4">Your Images</h2>
+                                {images.length === 0 ? (
+                                        <p className="text-gray-600">No images uploaded yet.</p>
+                                ) : (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                {images.map((image) => (
+                                                        <Card key={image.id} className="overflow-hidden">
+                                                                <CardContent className="p-0">
+                                                                        <div className="relative aspect-square">
+                                                                                <Image
+                                                                                        src={`/api/images/${image.imageId}`}
+                                                                                        alt={`Image uploaded on ${new Date(image.createdAt).toLocaleDateString()}`}
+                                                                                        fill
+                                                                                        className="object-cover"
+                                                                                />
+                                                                        </div>
+                                                                        <div className="p-4">
+                                                                                <p className="text-sm text-gray-500">
+                                                                                        Uploaded on{" "}
+                                                                                        {new Date(image.createdAt).toLocaleDateString()}
+                                                                                </p>
+                                                                        </div>
+                                                                </CardContent>
+                                                        </Card>
+                                                ))}
+                                        </div>
+                                )}
+                        </div>
+                </div>
+        );
+}

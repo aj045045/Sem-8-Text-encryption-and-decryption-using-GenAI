@@ -25,13 +25,7 @@ export function LoginForm() {
         const res = await signIn("credentials", { email: data.email_id, password: data.password, redirect: false });
         if (!res?.error) {
             // Wait for session to update
-            const updatedSession = await getSession();
 
-            // if (updatedSession?.user.isAdmin) {
-            // window.location.href = pageLinks.admin.dashboard;
-            // } else {
-            // window.location.href = pageLinks.user.dashboard;
-            // }
         } else {
             toast.error(res.error);
         };
@@ -39,7 +33,7 @@ export function LoginForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
-                className="row-span-2 py-10 mx-auto space-y-8 text-green-950">
+                className="row-span-2 py-10 mx-auto space-y-8 ">
                 <div>
                     <div className="font-sans text-3xl">Login</div>
                     <div className="flex items-center text-sm text-neutral-600">

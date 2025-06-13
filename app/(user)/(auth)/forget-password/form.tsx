@@ -7,12 +7,11 @@ import Link from "next/link"
 import { pageLinks } from "@/constant/page-links"
 import { UtilityHandler } from "@/lib/form-handler"
 import * as z from "zod"
-import { forgetPasswordFormScheme, signUpFormSchema } from "@/interface/form"
+import { forgetPasswordFormScheme } from "@/interface/form"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
 import { useState } from "react"
 import { OTPEmailProps } from "@/interface/email"
 import { OTPGeneratorUtil } from "@/lib/otp-generator"
-import { toast } from "sonner"
 import { useZodForm } from "@/lib/use-zod-form"
 import { hashPassword } from "@/lib/utils"
 import { redirect } from "next/navigation"
@@ -105,7 +104,7 @@ export function ForgetPasswordForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleForgetSubmit)}
-                className="row-span-2 py-10 mx-auto space-y-8 text-green-950">
+                className="row-span-2 py-10 mx-auto space-y-8 ">
                 <div>
                     <div className="font-sans text-3xl">Forget Password</div>
                     <div className="flex items-center text-sm text-neutral-600">
