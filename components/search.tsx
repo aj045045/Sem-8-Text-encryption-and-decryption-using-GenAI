@@ -30,7 +30,7 @@ export function SearchBarComp() {
 
     const userLinks = [
         { href: pageLinks.user.profile, label: "Profile", icon: <User size={18} /> },
-        { href: pageLinks.user.encrypt_message, label: "Encrypt message", icon: <MessageCircle size={18} /> },
+        { href: pageLinks.user.decrypt_message, label: "Decrypt message", icon: <MessageCircle size={18} /> },
 
     ];
 

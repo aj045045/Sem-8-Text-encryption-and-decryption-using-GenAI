@@ -2,9 +2,13 @@
 various properties such as `logo`, `sign_up`, `login`, `forget_password`, and `social`, each with
 their own nested properties like `src` (source URL) and `alt` (alternative text) for images. */
 export const assetsLinks = {
-    logo: {
-        src: '/logo.png',
-        alt: 'Logo Image'
+    logo_white: {
+        src: '/logo-white.png',
+        alt: 'Logo White Image'
+    },
+    logo_dark: {
+        src: '/logo-dark.png',
+        alt: 'Logo Dark Image'
     },
     sign_up: {
         src: '/sign-up.svg',

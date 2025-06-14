@@ -26,3 +26,4 @@
 - npm i nodemailer
 - npm i --save-dev @types/nodemailer
 - npm install lottie-react
+- npm install next-themes

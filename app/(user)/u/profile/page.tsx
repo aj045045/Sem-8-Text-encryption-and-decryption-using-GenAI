@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useSWR from "swr";
+import { AddImage } from "./add-image";
 
 interface User {
         id: number;
@@ -33,7 +34,7 @@ export default function ProfilePage() {
         if (isUserLoading || isImageLoading) {
                 return (
                         <div className="flex items-center justify-center min-h-screen">
-                                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+                                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 dark:border-white"></div>
                         </div>
                 );
         }
@@ -72,7 +73,10 @@ export default function ProfilePage() {
                                         </CardContent>
                                 </Card>
 
-                                <h2 className="text-2xl font-bold mb-4">Your Images</h2>
+                                <div className="flex justify-between">
+                                        <div className="text-2xl font-bold mb-4">Your Assets</div>
+                                        <AddImage />
+                                </div>
                                 {images.length === 0 ? (
                                         <p className="text-gray-600">No images uploaded yet.</p>
                                 ) : (

@@ -5,7 +5,7 @@ export const pageLinks = {
     forget_password: '/forget-password',
     user: {
         profile: '/u/profile',
-        encrypt_message: '/u/encrypt-message',
+        decrypt_message: '/u/decrypt-message',
     },
 
 }
