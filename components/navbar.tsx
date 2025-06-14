@@ -108,7 +108,6 @@ export function NavbarComp() {
                             {/* Navigation Menu Mobile bar*/}
                             <Drawer>
                                 <div className="flex-row flex items-center space-x-2">
-                                    <ModeToggle />
                                     <SearchBarComp />
                                     {session ? (
                                         <Button
@@ -131,6 +130,7 @@ export function NavbarComp() {
                                             </Link>
                                         </>
                                     )}
+                                    <ModeToggle />
                                     <DrawerTrigger className="flex lg:hidden">
                                         <LucideMenu />
                                     </DrawerTrigger>

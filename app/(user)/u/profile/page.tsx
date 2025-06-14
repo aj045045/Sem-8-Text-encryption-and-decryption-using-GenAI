@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useSWR from "swr";
-import { AddImage } from "./add-image";
+import { EncryptMessageDialog } from "./encrypt-message";
 
 interface User {
         id: number;
@@ -75,7 +75,7 @@ export default function ProfilePage() {
 
                                 <div className="flex justify-between">
                                         <div className="text-2xl font-bold mb-4">Your Assets</div>
-                                        <AddImage />
+                                        <EncryptMessageDialog />
                                 </div>
                                 {images.length === 0 ? (
                                         <p className="text-gray-600">No images uploaded yet.</p>

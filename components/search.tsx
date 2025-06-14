@@ -1,5 +1,5 @@
 "use client"
-import { Home, LucideSearch, MessageCircle, User } from "lucide-react"
+import { Home, LucideSearch, MessageSquareText, User } from "lucide-react"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react";
@@ -30,8 +30,7 @@ export function SearchBarComp() {
 
     const userLinks = [
         { href: pageLinks.user.profile, label: "Profile", icon: <User size={18} /> },
-        { href: pageLinks.user.decrypt_message, label: "Decrypt message", icon: <MessageCircle size={18} /> },
-
+        { href: pageLinks.user.decrypt_message, label: "Decrypt message", icon: <MessageSquareText size={18} /> },
     ];
 
     return (
