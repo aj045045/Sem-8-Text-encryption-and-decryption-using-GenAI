@@ -17,6 +17,30 @@
 /.next/
 /out/
 
+# Python
+__pycache__/
+*.py[cod]
+*.pkl
+*.h5
+*.pt
+*.onnx
+*.log
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env
+
+# OS
+.DS_Store
+
+# Flask instance or uploads
+instance/
+static/*.png
+*.db
+
 # production
 /build
 
