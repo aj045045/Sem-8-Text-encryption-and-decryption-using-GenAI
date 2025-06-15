@@ -3,10 +3,11 @@ import { RootLayout } from "./config";
 
 export const metadata: Metadata = {
   title: {
-    default: "AJ Blog",
-    template: "%s |  AJ Blog",
+    default: "TED Gen AI",
+    template: "%s | TED Gen AI",
   },
-  description: "A modern blog application built with Next.js, allowing users to create and manage blog posts while providing admins with insightful analytics and management tools.",
+  description:
+    "TED Gen AI is a modern platform powered by Next.js. It enables users to publish content and gives administrators powerful tools for analytics and content management.",
 };
 
 export default RootLayout;

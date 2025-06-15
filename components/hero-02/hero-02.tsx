@@ -1,11 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { assetsLinks } from "@/constant/assets-links";
+import { pageLinks } from "@/constant/page-links";
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const Hero02 = () => {
+const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-background/80">
       <div className="max-w-screen-xl w-full mx-auto grid lg:grid-cols-2 gap-16 px-8 py-16">
@@ -20,8 +22,10 @@ const Hero02 = () => {
             Protect your sensitive communications with cutting-edge AI-driven encryption and decryption solutions.
           </p>
           <div className="mt-12 flex items-center gap-6">
-            <Button size="lg" className="rounded-full text-lg font-semibold px-8 py-6 shadow-lg hover:shadow-xl transition-shadow">
-              Start Now <ArrowUpRight className="ml-2 h-5 w-5" />
+            <Button asChild size="lg" className="rounded-full text-lg font-semibold px-8 py-6 shadow-lg hover:shadow-xl transition-shadow">
+              <Link href={pageLinks.sign_up}>
+                Start Now <ArrowUpRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
             <Button
               variant="outline"
@@ -47,4 +51,4 @@ const Hero02 = () => {
   );
 };
 
-export default Hero02;
+export default Hero;
