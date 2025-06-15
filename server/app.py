@@ -7,14 +7,15 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from werkzeug.utils import secure_filename
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Config
 OUTPUT_DIR = Path("static")
 STYLEGAN_SCRIPT = "./stylegan3/gen_images.py"
-NETWORK_PICKLE = "./stylegan3/network.pkl"
+NETWORK_PICKLE = "./network-snapshot-000000.pkl"
 
 
 @app.route("/encrypt", methods=["POST"])
