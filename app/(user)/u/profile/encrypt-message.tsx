@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { z } from "zod";
 import { useZodForm } from "@/lib/use-zod-form";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 
 export function EncryptMessageDialog() {
@@ -15,6 +16,7 @@ export function EncryptMessageDialog() {
     const [charCount, setCharCount] = useState(0);
     const [preview, setPreview] = useState<string | null>(null);
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+    const { data: session } = useSession();
 
     const formSchema = z.object({
         message: z
@@ -47,11 +49,37 @@ export function EncryptMessageDialog() {
             }
             setPreview(`data:image/png;base64,${data.display}`);
             setDownloadUrl(`/f${data.download}`);
+
+            // TODO Setup clodinary image
+
+            if (data.display && session?.user?.email) {
+                const uploadRes = await fetch('/api/custom/cloudinary/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        imageBase64: `data:image/png;base64,${data.display}`,
+                        userEmail: session.user.email, // Replace this with real session user id
+                    }),
+                });
+
+                const uploadData = await uploadRes.json();
+                if (!uploadRes.ok) {
+                    toast.error('Cloudinary upload failed.');
+                } else {
+                    toast.success('Image uploaded to Cloudinary.');
+                    console.log("Saved in DB:", uploadData.image);
+                }
+            }
+
         } catch (err: any) {
             toast.error('Network error: ' + err.message);
         } finally {
             toast.dismiss(toastId);
         }
+
+
     };
     return (
         <Dialog>
